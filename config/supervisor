@@ -1,0 +1,23 @@
+[program:qrobot]
+command=/home/qrobot/repo/venv/bin/uwsgi
+  --enable-threads
+  --single-interpreter
+  --vacuum
+  --chdir=/home/qrobot/repo/server
+  --uid=qrobot
+  --gid=www-data
+  --logto=/home/qrobot/log/uwsgi.log
+  --processes=4
+  --socket=/tmp/qrobot.sock
+  --chmod-socket=664
+  --master
+  --die-on-term
+  --need-app
+  --module=run
+  --callable=application
+directory=/home/qrobot/repo/server
+autostart=true
+autorestart=true
+priority=999
+stopsignal=INT
+environment=PATH=/home/qrobot/repo/venv/bin,FLASK_CONFIG=production,LOGS=/home/qrobot/log

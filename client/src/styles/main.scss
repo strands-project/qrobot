@@ -1,0 +1,104 @@
+@import "_variables.scss";
+
+// To align free text with button text that are at the same line
+.btn-align {
+  padding: ($padding-base-vertical + 2) $padding-base-horizontal $padding-base-vertical;
+}
+
+// Occupy all horizontal space
+.full-width {
+  width: 100% !important;
+}
+
+// For login/signup pages
+.center-block {
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+// Margins
+.m-b {
+  margin-bottom: 15px;
+}
+
+.m-t-sm {
+  margin-top: 10px;
+}
+
+.navbar-nav {
+  text-transform: uppercase;
+}
+
+.navbar-toggle {
+  float: left;
+  margin-left: $navbar-padding-horizontal;
+  margin-right: 0px;
+}
+
+.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $screen-lg-min;
+}
+
+@media (min-width: $screen-xs-min) {
+  .navbar-header {
+    display: none;
+  }
+
+  .navbar-nav {
+    display: table;
+    float: none;
+    margin: 0 auto;
+    table-layout: fixed;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+
+@media (min-width: $screen-xs-min) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+
+  .modal.fade .modal-dialog {
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .modal.fade.in .modal-dialog {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal {
+  text-align: center;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.task-list {
+  zoom: 1.5;
+  margin-bottom: 0px;
+  li:not(:last-child) {
+    margin-bottom: 5px;
+  }
+}

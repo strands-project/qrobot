@@ -1,0 +1,29 @@
+session_name: qrobot
+before_script: ./scripts/bootstrap.sh development
+start_directory: ./
+shell_command_before: source .environment
+windows:
+  - window_name: tasks
+    focus: true
+    panes:
+      - blank
+  - window_name: frontend
+    start_directory: ./client
+    panes:
+      - vim src/index.js
+  - window_name: backend
+    start_directory: ./server
+    panes:
+      - vim src/__init__.py
+  - window_name: server
+    layout: main-vertical
+    panes:
+      - cd client && npm start
+      - cd server && python run.py
+      - python -m smtpd -n -c DebuggingServer localhost:2525
+  - window_name: mongo
+    panes:
+      - mongo
+  - window_name: shell
+    panes:
+      - cd server && python run.py shell

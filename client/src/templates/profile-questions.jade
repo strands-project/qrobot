@@ -1,0 +1,4 @@
+div.col-lg-12
+  p(data-hook="has-questions") Our database has #[span(data-hook="num-questions-total")] questions and you have answered all of them! We will shoot you an e-mail when the robot has new questions.
+  p(data-hook="has-no-questions") We have #[span(data-hook="num-questions-unanswered")] questions for you.
+  a.btn.btn-primary.btn(data-hook="answer", href="/question") Answer questions

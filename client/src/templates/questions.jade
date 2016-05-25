@@ -1,0 +1,32 @@
+main
+  div.row
+    div.col-md-6
+      div.row
+        div.col-md-12
+          h2 3D Model
+          canvas(data-hook="viewer")
+      div.row
+        div.col-md-12
+          h2 Images
+          div(data-hook="images")
+    div.col-md-6
+      div.row
+        div.col-md-12
+          h2 Question
+          div.panel.panel-default
+            div.panel-body
+              p
+              | Please provide label(s) for the object you see. Below is a list a of automatic suggestions
+              | from the robot. Click the labels to add them to the list. Use the input field to add more labels.
+              | Click the submit button in the end.
+              p
+              p
+                span Suggested labels:&nbsp;
+                ul.list-inline(data-hook="suggestions")
+          div.panel.panel-default
+            div.panel-heading Labels
+            div.panel-body
+              div(data-hook="label-editor")
+              div.btn-group.btn-group-justified
+                a.btn.btn-warning(data-hook="skip") No idea
+                a.btn.btn-success(data-hook="submit") Submit

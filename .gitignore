@@ -1,0 +1,5 @@
+venv/
+data/
+config/flask.py
+__pycache__/
+*.pyc
