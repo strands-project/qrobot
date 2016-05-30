@@ -1,3 +1,4 @@
+import os
 import sys
 
 from flask import Flask, request, current_app
@@ -37,9 +38,9 @@ def create_app(config_name):
     if config_name == 'production':
         import logging
         from logging.handlers import TimedRotatingFileHandler
-        trfh = TimedRotatingFileHandler(app.config['LOG_FILENAME'],
+        trfh = TimedRotatingFileHandler(os.path.join(os.environ['LOGS'], 'flask.log'),
                                         when='midnight',
-                                        backupCount=app.config['LOG_BACKUP_COUNT'])
+                                        backupCount=7)
         trfh.setLevel(logging.WARNING)
         app.logger.addHandler(trfh)
     return app

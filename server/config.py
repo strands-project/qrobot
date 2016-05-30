@@ -1,4 +1,3 @@
-import os
 from datetime import timedelta
 
 
@@ -19,9 +18,7 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    MONGODB_DB = 'production'
-    LOG_FILENAME = os.path.join(os.environ['LOGS'], 'flask.log')
-    LOG_BACKUP_COUNT = 7
+    MONGODB_DB = 'crowdsourcing_data'
 
 
 class DevelopmentConfig(Config):
