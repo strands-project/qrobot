@@ -44,7 +44,7 @@ def release():
     os.chdir(os.environ['PROJECT_CLIENT'])
     print(run('npm run build'))
     run('mkdir -p dist')
-    run('cp build/* dist')
+    run('cp -r build/* dist')
     run('git checkout -b pre-release')
     run('git add dist')
     rev = get_next_revision_number()
