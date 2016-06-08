@@ -62,12 +62,8 @@ var common = {
         loaders: ['style', 'css', 'sass']
       },
       {
-        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10000'
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-        loader: 'file'
+        test: /\.(ttf|eot|svg|woff|woff2)(\?[\s\S]+)?$/,
+        loader: 'file?name=fonts/[name].[ext]'
       }
     ]
   },

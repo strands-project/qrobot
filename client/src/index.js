@@ -12,6 +12,7 @@ require('animate.css/animate.css')
 require('ladda/dist/ladda-themeless.min.css')
 require('pace/themes/blue/pace-theme-flash.css')
 require('app/styles/main.scss')
+require('app/fonts/source-sans-pro.scss')
 
 pace.start()
 window.app = app
