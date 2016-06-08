@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, current_app, request
 
 from src.models import User
 
@@ -21,3 +21,17 @@ def set_jwt_handlers(jwt):
     @jwt.auth_response_handler
     def auth_response_handler(access_token, identity):
         return jsonify(token=access_token.decode('utf-8'))
+
+    @jwt.request_handler
+    def request_handler():
+        # Almost the same as the default request handler, but supports
+        # authorization headers with multiple methods. For example, the
+        # following is now possible:
+        #   Authorization: Basic xxxx JWT yyyy
+        auth_header_value = request.headers.get('Authorization', None)
+        auth_header_prefix = current_app.config['JWT_AUTH_HEADER_PREFIX']
+        if auth_header_value:
+            parts = auth_header_value.split()
+            for p in zip(parts[0::2], parts[1::2]):
+                if p[0].lower() == auth_header_prefix.lower():
+                    return p[1]
