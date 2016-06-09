@@ -27,9 +27,9 @@ function production() {
   > $flask
   echo "SECRET_KEY = '`pwgen -s 32 1`'" >> $flask
   echo "SECRET_SALT = '`pwgen -s 16 1`'" >> $flask
-  echo "MONGO_DB = 'qrobot'" >> $flask
-  echo "# MONGO_HOST = 'localhost'" >> $flask
-  echo "# MONGO_PORT = 27017" >> $flask
+  echo "MONGODB_DB = 'qrobot'" >> $flask
+  echo "# MONGODB_HOST = 'localhost'" >> $flask
+  echo "# MONGODB_PORT = 27017" >> $flask
   echo "# MAIL_SERVER = 'localhost'" >> $flask
   echo "# MAIL_PORT = 25" >> $flask
   # Transfer ownership of created files to the qrobot user
