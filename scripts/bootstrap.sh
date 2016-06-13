@@ -27,7 +27,7 @@ function production() {
   > $flask
   echo "SECRET_KEY = '`pwgen -s 32 1`'" >> $flask
   echo "SECRET_SALT = '`pwgen -s 16 1`'" >> $flask
-  echo "MONGODB_DB = 'qrobot'" >> $flask
+  echo "# MONGODB_DB = 'qrobot'" >> $flask
   echo "# MONGODB_HOST = 'localhost'" >> $flask
   echo "# MONGODB_PORT = 27017" >> $flask
   echo "# MAIL_SERVER = 'localhost'" >> $flask

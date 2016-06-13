@@ -18,7 +18,7 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    MONGODB_DB = 'crowdsourcing_data'
+    MONGODB_DB = 'qrobot'
 
 
 class DevelopmentConfig(Config):
