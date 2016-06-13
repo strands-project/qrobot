@@ -17,6 +17,10 @@ export HOST='localhost'
 export FRONTEND_PORT='8000'
 export BACKEND_PORT='8001'
 
+export STAGING_HOST='localhost'
+export STAGING_SSH_PORT='2222'
+export STAGING_ADMIN='sergey'
+
 _complete_invoke()
 {
   local candidates

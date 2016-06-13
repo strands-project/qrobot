@@ -1,12 +1,3 @@
 #!/bin/bash
 
-working_tree="/home/qrobot/www"
-tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-if [[ -n "$tag" ]]; then
-   GIT_WORK_TREE=$working_tree git checkout $tag -f
-   echo "   /==============================="
-   echo "   | DEPLOYMENT COMPLETED"
-   echo "   | Target folder : $working_tree"
-   echo "   | Tag name      : $tag"
-   echo "   \=============================="
-fi
+GIT_WORK_TREE='/home/qrobot/repo' git checkout rc -f
