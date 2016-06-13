@@ -63,7 +63,7 @@ def release():
     run('git checkout -b build')
     run('git add dist')
     rev = get_next_revision_number()
-    run('git commit -m "Release revision {}"'.format(rev))
+    run('git commit -m "Revision {}"'.format(rev))
     run('git tag r{}'.format(rev))
     run('git checkout master')
     run('git branch -D build')
