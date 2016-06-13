@@ -51,8 +51,6 @@ function production() {
     ln -s /etc/nginx/sites-available/qrobot /etc/nginx/sites-enabled/qrobot
   fi
   /etc/init.d/nginx restart
-  # Update to the latest version of the app
-  bash scripts/update.sh
 }
 
 function development() {

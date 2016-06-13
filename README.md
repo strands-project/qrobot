@@ -14,11 +14,12 @@ Navigate to the "repo" folder:
 
     $ cd repo
 
-Run production bootstrapping script as root (note that since the "qrobot" user
-is not in sudoes, you need to `su` as the admin user first):
+Run production bootstrap and update scripts as root (note that since the
+"qrobot" user is not in sudoes, you need to `su` as the admin user first):
 
     $ su %username%
     # ./scripts/bootstrap.sh production
+    # ./scripts/update.sh
 
 ### Configuration
 
