@@ -62,4 +62,4 @@ def _create_email_confirmation_message(user):
     html = render_template('email/confirm.html', confirm_url=confirm_url)
     return Message('QRobot - Please confirm your e-mail address',
                    recipients=[user.email],
-                   body=html)
+                   html=html)
