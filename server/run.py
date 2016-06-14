@@ -12,4 +12,4 @@ if __name__ == '__main__':
         context = dict(app=application, db=db, mail=mail)
         embed(user_ns=context)
     else:
-        application.run(threaded=True, port=int(os.environ['BACKEND_PORT']))
+        application.run(threaded=True, port=int(os.environ['DEV_BACKEND_PORT']))

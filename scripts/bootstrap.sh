@@ -54,6 +54,17 @@ function production() {
 }
 
 function development() {
+  echo "Bootstrapping development environment"
+  echo "Please enter host and ports for the development server"
+  read -e -p "Development host: " -i "localhost" dev_host
+  read -e -p "Development frontend port: " -i "8000" dev_front_port
+  read -e -p "Development backend port: " -i "8001" dev_back_port
+  local_env=$PROJECT_ROOT/.environment.local
+  > $local_env
+  echo "export DEV_HOST='$dev_host'" >> $local_env
+  echo "export DEV_FRONTEND_PORT='$dev_front_port'" >> $local_env
+  echo "export DEV_BACKEND_PORT='$dev_back_port'" >> $local_env
+
   if [[ ! -d "$PROJECT_VENV" ]]; then
     virtualenv -p python3 venv
     $PROJECT_VENV/bin/pip install -r $PROJECT_CONFIG/common.pip
@@ -64,6 +75,20 @@ function development() {
   fi
 }
 
+function staging() {
+  echo "Bootstrapping staging environment"
+  echo "Please enter host, ssh port, and admin account for the staging server"
+  read -e -p "Staging host: " -i "localhost" staging_host
+  read -e -p "Staging SSH port: " -i "2222" staging_ssh_port
+  read -e -p "Staging admin account: " -i "`whoami`" staging_admin
+  local_env=$PROJECT_ROOT/.environment.local
+  echo "export STAGING_HOST='$staging_host'" >> $local_env
+  echo "export STAGING_SSH_PORT='$staging_ssh_port'" >> $local_env
+  echo "export STAGING_ADMIN='$staging_admin'" >> $local_env
+  source $local_env
+  fab -f $PROJECT_ROOT/scripts/fabfile.py setup_staging
+}
+
 case $1 in
   production)   if [ "$EUID" -ne 0 ]; then
                   echo "Please run as root"
@@ -71,7 +96,8 @@ case $1 in
                 fi
                 production;;
   development)  development;;
-  *)            printf "Usage: %s (production|development)\n" $0
+  staging)      staging;;
+  *)            printf "Usage: %s (production|development|staging)\n" $0
                 exit 2;;
 esac
 

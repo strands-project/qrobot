@@ -26,6 +26,14 @@ def create_user():
     sudo('echo "{}" >> /home/qrobot/.ssh/authorized_keys'.format(p))
     sudo('chown qrobot:qrobot "/home/qrobot/.ssh" -R')
     sudo('chmod 600 /home/qrobot/.ssh/authorized_keys')
+    programs = list()
+    programs.append('/usr/bin/supervisorctl reread qrobot')
+    programs.append('/usr/bin/supervisorctl restart qrobot')
+    programs.append('/etc/init.d/nginx restart')
+    s = '\n'.join(['qrobot ALL=(ALL) NOPASSWD: {}'.format(p) for p in programs])
+    q = '/etc/sudoers.d/qrobot'
+    e = 'echo "{}" | (EDITOR="tee -a" visudo -f {})'.format(s, q)
+    sudo("bash -c '{}'".format(e))
 
 
 def setup_git():
@@ -45,6 +53,7 @@ def setup_git():
             with lcd(LOCAL_CONFIG):
                 with cd('hooks'):
                     put('post-receive', 'post-receive', mode=0O775)
+
 
 def bootstrap():
     """

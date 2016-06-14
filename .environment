@@ -1,4 +1,14 @@
-export PROJECT_ROOT=`pwd`
+# Load local development environment.
+# This file should be sourced from within the git repository. The development
+# environment should be already set up with the bootstrap script.
+
+git_root=`git rev-parse --show-toplevel 2>/dev/null`
+if [[ $? -ne 0 ]]; then
+  echo "Please source from within git repository"
+  return
+fi
+
+export PROJECT_ROOT=$git_root
 export PROJECT_VENV=$PROJECT_ROOT/venv
 export PROJECT_CONFIG=$PROJECT_ROOT/config
 export PROJECT_CLIENT=$PROJECT_ROOT/client
@@ -6,20 +16,19 @@ export PROJECT_SERVER=$PROJECT_ROOT/server
 
 export PYTHONPATH=$PROJECT_SERVER:$PYTHONPATH
 
-bash scripts/bootstrap.sh development
+if [[ ! -d "$PROJECT_VENV" ]]; then
+  echo "Please bootstrap development environment first"
+  return
+fi
 
 source $PROJECT_VENV/bin/activate
 
 alias invoke='invoke --root $PROJECT_ROOT/scripts'
 alias inv='inv --root $PROJECT_ROOT/scripts'
 
-export HOST='localhost'
-export FRONTEND_PORT='8000'
-export BACKEND_PORT='8001'
-
-export STAGING_HOST='localhost'
-export STAGING_SSH_PORT='2222'
-export STAGING_ADMIN='sergey'
+if [[ -f "$PROJECT_ROOT/.environment.local" ]]; then
+  source $PROJECT_ROOT/.environment.local
+fi
 
 _complete_invoke()
 {

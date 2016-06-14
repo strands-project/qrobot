@@ -1,3 +1,11 @@
 #!/bin/bash
 
+echo "Post-receive hook"
+echo "Checking out release candidate branch"
 GIT_WORK_TREE='/home/qrobot/repo' git checkout rc -f
+echo "Restarting Nginx"
+sudo /etc/init.d/nginx restart
+echo "Restarting Flask application"
+sudo supervisorctl reread qrobot
+sudo supervisorctl restart qrobot
+echo "Done"

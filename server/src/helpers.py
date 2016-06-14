@@ -10,9 +10,9 @@ from itsdangerous import URLSafeTimedSerializer
 def frontend_url_for(endpoint, **values):
     url = url_for(endpoint, **values).replace('/api', '', 1)
     try:
-        host = os.environ['HOST']
-        fp = os.environ['FRONTEND_PORT']
-        bp = os.environ['BACKEND_PORT']
+        host = os.environ['DEV_HOST']
+        fp = os.environ['DEV_FRONTEND_PORT']
+        bp = os.environ['DEV_BACKEND_PORT']
         url = url.replace('{}:{}'.format(host, bp), '{}:{}'.format(host, fp))
     except KeyError:
         pass

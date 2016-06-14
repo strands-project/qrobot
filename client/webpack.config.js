@@ -80,8 +80,8 @@ if (TARGET === 'start' || !TARGET) {
       inline: true,
       progress: true,
       stats: 'errors-only',
-      host: process.env.HOST,
-      port: process.env.FRONTEND_PORT,
+      host: process.env.DEV_HOST,
+      port: process.env.DEV_FRONTEND_PORT,
       contentBase: PATHS.static
     },
     plugins: [
