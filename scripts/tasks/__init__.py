@@ -49,7 +49,7 @@ def stage():
     run('git add dist')
     rev = get_next_revision_number()
     run('git commit -m "Release candidate (revision {})"'.format(rev))
-    run('git push staging build:rc')
+    run('git push staging build:rc --force')
     run('git checkout master')
     run('git branch -D build')
 
