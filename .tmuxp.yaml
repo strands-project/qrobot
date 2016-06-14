@@ -1,5 +1,4 @@
 session_name: qrobot
-before_script: ./scripts/bootstrap.sh development
 start_directory: ./
 shell_command_before: source .environment
 windows:
