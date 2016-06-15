@@ -51,16 +51,17 @@ var QuestionsView = AmpersandView.extend({
   bindings: {
     'hasQuestions': [
       {
-        type: 'toggle',
-        selector: 'a'
+        type: 'booleanClass',
+        selector: '.widget',
+        name: 'widget-success'
       },
       {
         type: 'toggle',
-        hook: 'has-no-questions'
+        hook: 'has-questions'
       },
       {
         type: 'toggle',
-        hook: 'has-questions',
+        hook: 'has-no-questions',
         invert: true
       }
     ],

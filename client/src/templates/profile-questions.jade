@@ -1,4 +1,10 @@
 div.col-lg-12
-  p(data-hook="has-questions") Our database has #[span(data-hook="num-questions-total")] questions and you have answered all of them! We will shoot you an e-mail when the robot has new questions.
-  p(data-hook="has-no-questions") We have #[span(data-hook="num-questions-unanswered")] questions for you.
-  a.btn.btn-primary.btn(data-hook="answer", href="/question") Answer questions
+  div.widget.widget-success
+    div.row
+      div.col-xs-3
+        i.fa.fa-question-circle.fa-5x
+      div.col-xs-9.text-right
+        h4(data-hook="has-questions") We have #[span(data-hook="num-questions-unanswered")] questions for you
+        h4(data-hook="has-no-questions") We don't have any questions right now
+        span(data-hook="has-questions") Start #[a.widget-link(href="/question") answering] questions
+        span(data-hook="has-no-questions") We will shoot you an e-mail when the robot has new questions

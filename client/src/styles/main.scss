@@ -102,3 +102,41 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 5px;
   }
 }
+
+.widget {
+  border: 1px solid $navbar-default-border;
+  border-radius: $border-radius-base;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  vertical-align: center;
+
+  .widget-link {
+    font-weight: normal;
+    text-decoration: underline;
+    color: $panel-default-text;
+  }
+
+  h4 {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  &-success {
+    background-color: $brand-success;
+    color: $panel-success-text;
+    h4, .widget-link {
+      color: $panel-success-text;
+    }
+  }
+
+  &-warning {
+    background-color: $brand-warning;
+    color: $panel-warning-text;
+    h4, .widget-link {
+      color: $panel-warning-text;
+    }
+  }
+}
