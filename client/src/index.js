@@ -21,10 +21,7 @@ app.extend({
   init: function init () {
     console.log('Application initialization')
 
-    this.view = new MainView({
-      template: require('./templates/body.jade')
-    })
-
+    this.view = new MainView()
     this.router = new Router()
     this.storage = new Storage()
 

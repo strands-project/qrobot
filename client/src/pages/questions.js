@@ -35,7 +35,6 @@ var SuggestionView = AmpersandView.extend({
 
 module.exports = AmpersandView.extend({
   pageTitle: 'Question',
-  withNavbar: true,
   requiresLogin: true,
 
   template: require('app/templates/questions.jade'),

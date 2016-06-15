@@ -13,7 +13,6 @@ var User = require('app/models/user')
 
 module.exports = AmpersandView.extend({
   pageTitle: 'Sign up',
-  withNavbar: false,
 
   template: require('app/templates/signup.jade'),
 

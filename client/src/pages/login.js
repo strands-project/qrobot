@@ -10,7 +10,6 @@ var Ladda = require('app/components/ladda')
 
 module.exports = AmpersandView.extend({
   pageTitle: 'Log in',
-  withNavbar: false,
 
   template: require('app/templates/login.jade'),
 

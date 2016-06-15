@@ -72,7 +72,6 @@ var QuestionsView = AmpersandView.extend({
 
 module.exports = AmpersandView.extend({
   pageTitle: 'Profile',
-  withNavbar: true,
   requiresLogin: true,
 
   props: {
