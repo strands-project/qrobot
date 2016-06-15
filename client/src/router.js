@@ -16,9 +16,7 @@ module.exports = AmpersandRouter.extend({
     '': 'profile.home',
     'login': 'login',
     'signup': 'signup',
-    'welcome': 'profile.welcome',
     'user/confirm/:token': 'confirm',
-    'objects(/:filter)': 'objects.list',
     'question': 'questions',
     '(*path)': 'profile'
   },

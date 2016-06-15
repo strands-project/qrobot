@@ -114,7 +114,7 @@ module.exports = AmpersandView.extend({
           })
         }).done(function (data) {
           if (data.status === 'success') {
-            app.once('auth', app.navigate.bind(app, 'welcome'))
+            app.once('auth', app.navigate.bind(app, '/'))
             app.auth(data.token)
           } else {
             that.alert.set({

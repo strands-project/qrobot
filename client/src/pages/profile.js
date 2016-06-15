@@ -7,24 +7,11 @@ var TaskRunner = require('app/components/task-runner')
 
 var ConfirmView = AmpersandView.extend({
   template: require('app/templates/profile-confirm.jade'),
-
-  autoRender: true,
-
-  props: {
-    welcome: ['boolean', true, false]
-  },
-
-  bindings: {
-    'welcome': {
-      type: 'toggle',
-      hook: 'welcome'
-    }
-  }
+  autoRender: true
 })
 
 var QuestionsView = AmpersandView.extend({
   template: require('app/templates/profile-questions.jade'),
-
   autoRender: true,
 
   props: {
@@ -114,10 +101,6 @@ module.exports = AmpersandView.extend({
   // Actions
 
   home: function (query) {
-  },
-
-  welcome: function () {
-    this.confirmView.welcome = true
   },
 
   resend: function () {
