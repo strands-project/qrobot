@@ -7,6 +7,7 @@ module.exports = AmpersandRouter.extend({
     profile: require('./pages/profile'),
     login: require('./pages/login'),
     signup: require('./pages/signup'),
+    feedback: require('./pages/feedback'),
     confirm: require('./pages/confirm'),
     objects: require('./pages/objects'),
     questions: require('./pages/questions')
@@ -16,6 +17,7 @@ module.exports = AmpersandRouter.extend({
     '': 'profile.home',
     'login': 'login',
     'signup': 'signup',
+    'feedback': 'feedback',
     'user/confirm/:token': 'confirm',
     'question': 'questions',
     '(*path)': 'profile'

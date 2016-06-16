@@ -10,30 +10,49 @@
   width: 100% !important;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
+// Margins
+
+$margin:     15px !default;
+$margin-sm:  10px !default;
+$margin-md:  20px !default;
+$margin-lg:  30px !default;
+$margin-xl:  40px !default;
+
+.m-b {
+  margin-bottom: $margin;
+}
+
+.m-t-sm {
+  margin-top: $margin-sm;
+}
+
+.m-t-md {
+  margin-top: $margin-md;
+}
+
+.m-t-lg {
+  margin-top: $margin-lg;
+}
+
+.m-t-xl {
+  margin-top: $margin-xl;
+}
+
+.navbar-nav {
+  text-transform: uppercase;
+}
+
 // For login/signup pages
 .center-block {
   width: 300px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 40px;
-}
-
-.text-bold {
-  font-weight: bold;
-}
-
-// Margins
-.m-b {
-  margin-bottom: 15px;
-}
-
-.m-t-sm {
-  margin-top: 10px;
-}
-
-.navbar-nav {
-  text-transform: uppercase;
+  margin-top: $margin-xl;
 }
 
 .navbar-toggle {

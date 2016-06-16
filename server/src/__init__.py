@@ -9,6 +9,7 @@ from src.auth import jwt
 from src.helpers import MongoEngineJSONEncoder, jsonify
 from src.endpoints.file import blueprint as file_blueprint
 from src.endpoints.user import blueprint as user_blueprint
+from src.endpoints.feedback import blueprint as feedback_blueprint
 from src.endpoints.question import blueprint as question_blueprint
 
 
@@ -32,6 +33,7 @@ def create_app(config_name):
     app.register_blueprint(question_blueprint, url_prefix='/api/question')
     app.register_blueprint(file_blueprint, url_prefix='/api/file')
     app.register_blueprint(user_blueprint, url_prefix='/api/user')
+    app.register_blueprint(feedback_blueprint, url_prefix='/api/feedback')
     if app.config['DEBUG']:
         app.before_request(print_request)
         app.after_request(add_cors_and_print_response)
