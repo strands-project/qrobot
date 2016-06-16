@@ -18,7 +18,9 @@ main
               p
               | Please provide label(s) for the object you see. Below is a list a of automatic suggestions
               | from the robot. Click the labels to add them to the list. Use the input field to add more labels.
-              | Click the submit button in the end.
+              | Press the submit button in the end.
+              p
+              | If the 3D model and images do not make any sense to you, just press the "It's junk!" button.
               p
               p
                 span Suggested labels:&nbsp;
@@ -28,5 +30,5 @@ main
             div.panel-body
               div(data-hook="label-editor")
               div.btn-group.btn-group-justified
-                a.btn.btn-warning(data-hook="skip") No idea
+                a.btn.btn-warning(data-hook="skip") It's junk!
                 a.btn.btn-success(data-hook="submit") Submit
