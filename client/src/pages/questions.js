@@ -81,6 +81,7 @@ module.exports = AmpersandView.extend({
 
   initialize: function initialize () {
     console.log('[Questions] initialize')
+    this.questionsAnswered = 0
   },
 
   render: function () {
@@ -144,6 +145,7 @@ module.exports = AmpersandView.extend({
 
   submitAnswer: function submitAnswer (answer) {
     var that = this
+    this.questionsAnswered += 1
     answer.duration = ((new Date()).getTime() - this.timeStart) / 1000
 
     var taskRunner = new TaskRunner.Model()
@@ -182,6 +184,7 @@ module.exports = AmpersandView.extend({
   },
 
   taskFetchQuestion: function taskFetchQuestion (callback) {
+    var that = this
     this.question = new Question.Model()
     this.question.fetch({
       success: function (question, response) {
@@ -191,6 +194,7 @@ module.exports = AmpersandView.extend({
         } else {
           // No more questions
           console.log('No more questions!')
+          app.flash("Well done, you have answered " + that.questionsAnswered + " questions! That's all we have for now.")
           callback(null)
           app.navigate('/')
         }

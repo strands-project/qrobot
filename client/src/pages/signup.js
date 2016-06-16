@@ -114,7 +114,10 @@ module.exports = AmpersandView.extend({
           })
         }).done(function (data) {
           if (data.status === 'success') {
-            app.once('auth', app.navigate.bind(app, '/'))
+            app.once('auth', function () {
+              app.flash('Thanks for registering for QRobot. We have sent a confirmation e-mail to the address you provided, but it may take some time until it is delivered. In the meanwhile you can start to answer questions!')
+              app.navigate('/')
+            })
             app.auth(data.token)
           } else {
             that.alert.set({
