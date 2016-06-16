@@ -100,9 +100,6 @@ module.exports = AmpersandView.extend({
 
   // Actions
 
-  home: function (query) {
-  },
-
   resend: function () {
     var taskRunner = new TaskRunner.Model()
     taskRunner.addTask('Sending confirmation e-mail', function (callback) {

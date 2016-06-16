@@ -14,7 +14,7 @@ module.exports = AmpersandRouter.extend({
   },
 
   routes: {
-    '': 'profile.home',
+    '': 'profile',
     'login': 'login',
     'signup': 'signup',
     'feedback': 'feedback',
