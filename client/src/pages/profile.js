@@ -5,6 +5,22 @@ var AmpersandView = require('ampersand-view')
 var config = require('config')
 var TaskRunner = require('app/components/task-runner')
 
+var FlashView = AmpersandView.extend({
+  template: require('app/templates/profile-flash.jade'),
+  autoRender: true,
+
+  props: {
+    message: 'string'
+  },
+
+  bindings: {
+    message: {
+      type: 'text',
+      hook: 'message'
+    }
+  }
+})
+
 var ConfirmView = AmpersandView.extend({
   template: require('app/templates/profile-confirm.jade'),
   autoRender: true
@@ -81,16 +97,20 @@ module.exports = AmpersandView.extend({
   render: function render () {
     var that = this
     this.renderWithTemplate(this)
+    if (app.message) {
+      this.flashView = this.renderSubview(new FlashView({ 'message': app.message }), '[data-hook=flash]')
+      delete app.message
+    }
     if (!app.me.email_confirmed) {
       this.confirmView = this.renderSubview(new ConfirmView(), '[data-hook=confirm]')
     }
+    this.questionsView = this.renderSubview(new QuestionsView(), '[data-hook=questions]')
     $.ajax(config.api.url + '/question/stats', {
       method: 'GET',
       headers: app.getAuthHeader()
     }).fail(function (xhr, status, err) {
     }).done(function (data) {
       if (data.status === 'success') {
-        that.questionsView = that.renderSubview(new QuestionsView(), '[data-hook=questions]')
         that.questionsView.numQuestionsTotal = data.questions
         that.questionsView.numQuestionsAnswered = data.answers
       } else {

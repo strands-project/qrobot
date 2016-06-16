@@ -72,6 +72,10 @@ app.extend({
   navigate: function navigate (where) {
     this.view.modal.hide()
     this.router.navigate(where)
+  },
+
+  flash: function flash (message) {
+    this.message = message
   }
 })
 
