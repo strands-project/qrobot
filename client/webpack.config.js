@@ -37,7 +37,7 @@ var common = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/templates/index.jade',
+      template: 'src/index.html',
       inject: 'body'
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.min-[hash:6].js'),
