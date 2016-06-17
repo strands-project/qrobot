@@ -20,7 +20,7 @@ var common = {
     app: [
       'font-awesome-loader',
       'bootstrap-loader',
-      PATHS.src
+      PATHS.src + '/app.js'
     ],
     vendor: Object.keys(pkg.dependencies)
   },

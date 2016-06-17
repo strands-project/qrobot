@@ -9,7 +9,7 @@ windows:
   - window_name: frontend
     start_directory: ./client
     panes:
-      - vim src/index.js
+      - vim src/app.js
   - window_name: backend
     start_directory: ./server
     panes:
