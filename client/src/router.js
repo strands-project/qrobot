@@ -4,7 +4,7 @@ var AmpersandRouter = require('ampersand-router')
 
 module.exports = AmpersandRouter.extend({
   pages: {
-    profile: require('./pages/profile'),
+    index: require('./pages/index'),
     login: require('./pages/login'),
     signup: require('./pages/signup'),
     feedback: require('./pages/feedback'),
@@ -14,13 +14,13 @@ module.exports = AmpersandRouter.extend({
   },
 
   routes: {
-    '': 'profile',
+    '': 'index',
     'login': 'login',
     'signup': 'signup',
     'feedback': 'feedback',
     'user/confirm/:token': 'confirm',
     'question': 'questions',
-    '(*path)': 'profile'
+    '(*path)': 'index'
   },
 
   initialize: function initRouter (options) {

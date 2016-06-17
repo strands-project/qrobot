@@ -6,7 +6,7 @@ var config = require('config')
 var TaskRunner = require('app/components/task-runner')
 
 var FlashView = AmpersandView.extend({
-  template: require('app/templates/profile-flash.jade'),
+  template: require('app/templates/index-flash.jade'),
   autoRender: true,
 
   props: {
@@ -22,12 +22,12 @@ var FlashView = AmpersandView.extend({
 })
 
 var ConfirmView = AmpersandView.extend({
-  template: require('app/templates/profile-confirm.jade'),
+  template: require('app/templates/index-confirm.jade'),
   autoRender: true
 })
 
 var QuestionsView = AmpersandView.extend({
-  template: require('app/templates/profile-questions.jade'),
+  template: require('app/templates/index-questions.jade'),
   autoRender: true,
 
   props: {
@@ -89,7 +89,7 @@ module.exports = AmpersandView.extend({
     }
   },
 
-  template: require('app/templates/profile.jade'),
+  template: require('app/templates/index.jade'),
 
   initialize: function initialize (params) {
     this.username = app.me.name
