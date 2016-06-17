@@ -56,7 +56,8 @@ var QuestionsView = AmpersandView.extend({
       {
         type: 'booleanClass',
         selector: '.widget',
-        name: 'widget-success'
+        yes: 'widget-success',
+        no: 'widget-default'
       },
       {
         type: 'toggle',
