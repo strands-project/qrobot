@@ -26,6 +26,8 @@ module.exports = AmpersandView.extend({
     return this
   },
 
+  /* Internal function, triggered on the 'newPage' event. Sets the current page
+   * and executes an action on it, if needed. */
   updatePage: function updatePage (page, action) {
     if (typeof page.pageTitle === 'string') {
       document.title = page.pageTitle
@@ -50,6 +52,8 @@ module.exports = AmpersandView.extend({
     }
   },
 
+  /* When a hash link is clicked and the current page has a function with the
+   * same name, it will be executed and event propagation will be stopped. */
   handleHashLinkClicked: function handleHashLinkClicked (event) {
     var action = links.hash(event).substring(1)
     if (action) {

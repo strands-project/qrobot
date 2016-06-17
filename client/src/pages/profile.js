@@ -91,32 +91,34 @@ module.exports = AmpersandView.extend({
 
   template: require('app/templates/profile.jade'),
 
-  initialize: function initialize () {
+  initialize: function initialize (params) {
     this.username = app.me.name
+    this.params = params
   },
 
   render: function render () {
     var that = this
     this.renderWithTemplate(this)
-    if (app.message) {
-      this.flashView = this.renderSubview(new FlashView({ 'message': app.message }), '[data-hook=flash]')
-      delete app.message
+    if (this.params['flash']) {
+      this.flashView = this.renderSubview(new FlashView({ 'message': this.params['flash'] }), '[data-hook=flash]')
     }
-    if (!app.me.email_confirmed) {
+    if (!(app.me.email_confirmed || this.params['noConfirm'])) {
       this.confirmView = this.renderSubview(new ConfirmView(), '[data-hook=confirm]')
     }
-    this.questionsView = this.renderSubview(new QuestionsView(), '[data-hook=questions]')
-    $.ajax(config.api.url + '/question/stats', {
-      method: 'GET',
-      headers: app.getAuthHeader()
-    }).fail(function (xhr, status, err) {
-    }).done(function (data) {
-      if (data.status === 'success') {
-        that.questionsView.numQuestionsTotal = data.questions
-        that.questionsView.numQuestionsAnswered = data.answers
-      } else {
-      }
-    })
+    if (!(this.params['noQuestions'])) {
+      this.questionsView = this.renderSubview(new QuestionsView(), '[data-hook=questions]')
+      $.ajax(config.api.url + '/question/stats', {
+        method: 'GET',
+        headers: app.getAuthHeader()
+      }).fail(function (xhr, status, err) {
+      }).done(function (data) {
+        if (data.status === 'success') {
+          that.questionsView.numQuestionsTotal = data.questions
+          that.questionsView.numQuestionsAnswered = data.answers
+        } else {
+        }
+      })
+    }
   },
 
   // Actions

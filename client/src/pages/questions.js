@@ -194,9 +194,9 @@ module.exports = AmpersandView.extend({
         } else {
           // No more questions
           console.log('No more questions!')
-          app.flash("Well done, you have answered " + that.questionsAnswered + " questions! That's all we have for now.")
+          var flash = 'Well done, you have answered ' + that.questionsAnswered + ' question' + (that.questionsAnswered > 1 ? 's' : '') + '! That\'s all we have for now. We will shoot you an e-mail when we have more questions.'
           callback(null)
-          app.navigate('/')
+          app.navigate('/', { 'flash': flash, 'noQuestions': true })
         }
       },
       error: function () {

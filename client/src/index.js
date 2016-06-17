@@ -69,13 +69,12 @@ app.extend({
     return { }
   },
 
-  navigate: function navigate (where) {
+  /* Navigate to a given path within application.
+   * Params will be passed to the destination page constructor without being
+   * exposed in the URL. */
+  navigate: function navigate (where, params) {
     this.view.modal.hide()
-    this.router.navigate(where)
-  },
-
-  flash: function flash (message) {
-    this.message = message
+    this.router.navigate(where, params)
   }
 })
 

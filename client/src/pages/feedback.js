@@ -28,7 +28,6 @@ module.exports = AmpersandView.extend({
 
   handleFormSubmitted: function handleFormSubmitted () {
     var that = this
-    console.log('Submitting feedback...')
     var message = this.query('textarea').value
     var xhr = $.ajax(config.api.url + '/feedback', {
       method: 'POST',
@@ -43,7 +42,7 @@ module.exports = AmpersandView.extend({
       })
     }).done(function (data) {
       if (data.status === 'success') {
-        app.navigate('/')
+        app.navigate('/', { 'flash': data.message })
       } else {
         that.alert.set({
           message: data.message,
