@@ -17,7 +17,9 @@ module.exports = AmpersandView.extend({
     app.view.modal.show(new TaskRunner.View({ model: taskRunner }))
     taskRunner.run(function () {
       if (!this.error) {
-        app.navigate()
+        app.navigate('/', {
+          flash: 'Thanks for confirming your e-mail address!'
+        })
       }
     })
   },
@@ -27,14 +29,14 @@ module.exports = AmpersandView.extend({
       method: 'POST',
       headers: app.getAuthHeader()
     }).fail(function (xhr, status, err) {
-      callback(new Error('Could not connect to the server'))
+      return callback(new Error('Could not connect to the server'))
     }).done(function (data) {
       if (data.status === 'success') {
         app.me.email_confirmed = true
-        callback(null)
+        return callback(null)
       } else {
         console.log('problems ' + data.message)
-        callback(new Error(data.message))
+        return callback(new Error(data.message))
       }
     })
   }
