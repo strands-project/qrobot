@@ -61,7 +61,7 @@ module.exports = AmpersandRouter.extend({
     if (params) {
       var query = params.pop()
       if (query) mergedParams['query'] = query
-      if (params.length) mergedParams['params'] = params
+      if (params.length) mergedParams['positional'] = params
     }
     if (this.hiddenParams) {
       mergedParams = _.merge(mergedParams, this.hiddenParams)

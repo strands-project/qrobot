@@ -12,7 +12,7 @@ module.exports = AmpersandView.extend({
 
   initialize: function initialize (params) {
     var taskRunner = new TaskRunner.Model()
-    taskRunner.addTask('Confirming e-mail address', _.bind(this.taskConfirmEmail, this, params[0]), 1500)
+    taskRunner.addTask('Confirming e-mail address', _.bind(this.taskConfirmEmail, this, params.positional[0]), 1500)
 
     app.view.modal.show(new TaskRunner.View({ model: taskRunner }))
     taskRunner.run(function () {
