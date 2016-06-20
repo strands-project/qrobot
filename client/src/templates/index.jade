@@ -2,15 +2,12 @@ div.row
   div.col-md-6.col-md-offset-3
     h1 Hi, #[span(data-hook="username")]
     div.row(data-hook="flash")
-    div.row(data-hook="questions")
-    div.row(data-hook="confirm")
     div.row
       div.col-lg-12
-        div.widget.widget-default
-          div.row
-            div.col-xs-3
-              i.fa.fa-comment.fa-5x
-            div.col-xs-9.text-right
-              h4 Feedback
-              span Click #[a.widget-link(href="/feedback") here] to tell us what you think
-
+        div(data-hook="questions")
+    div.row
+      div.col-lg-12
+        div(data-hook="confirm")
+    div.row
+      div.col-lg-12
+        div(data-hook="feedback")

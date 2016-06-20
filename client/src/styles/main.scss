@@ -130,7 +130,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 10px;
   vertical-align: center;
 
-  .widget-link {
+  a {
     font-weight: normal;
     text-decoration: underline;
     color: $panel-default-text;
@@ -146,7 +146,7 @@ h1, h2, h3, h4, h5, h6 {
   &-success {
     background-color: $brand-success;
     color: $panel-success-text;
-    h4, .widget-link {
+    h4, a {
       color: $panel-success-text;
     }
   }
@@ -154,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
   &-warning {
     background-color: $brand-warning;
     color: $panel-warning-text;
-    h4, .widget-link {
+    h4, a {
       color: $panel-warning-text;
     }
   }
@@ -162,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
   &-default {
     background-color: $gray-lighter;
     color: $panel-default-text;
-    h4, .widget-link {
+    h4, a {
       color: $panel-default-text;
     }
   }

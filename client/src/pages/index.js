@@ -1,9 +1,11 @@
 var $ = require('jquery')
 var app = require('ampersand-app')
 var AmpersandView = require('ampersand-view')
+var pluralize = require('pluralize')
 
 var config = require('config')
 var TaskRunner = require('app/components/task-runner')
+var Widget = require('app/components/widget')
 
 var FlashView = AmpersandView.extend({
   template: require('app/templates/index-flash.jade'),
@@ -21,15 +23,7 @@ var FlashView = AmpersandView.extend({
   }
 })
 
-var ConfirmView = AmpersandView.extend({
-  template: require('app/templates/index-confirm.jade'),
-  autoRender: true
-})
-
-var QuestionsView = AmpersandView.extend({
-  template: require('app/templates/index-questions.jade'),
-  autoRender: true,
-
+var QuestionsWidget = Widget.View.extend({
   props: {
     numQuestionsTotal: ['number', true, 0],
     numQuestionsAnswered: ['number', true, 0]
@@ -51,26 +45,19 @@ var QuestionsView = AmpersandView.extend({
     }
   },
 
-  bindings: {
-    'hasQuestions': [
-      {
-        type: 'booleanClass',
-        selector: '.widget',
-        yes: 'widget-success',
-        no: 'widget-default'
-      },
-      {
-        type: 'toggle',
-        hook: 'has-questions'
-      },
-      {
-        type: 'toggle',
-        hook: 'has-no-questions',
-        invert: true
+  initialize: function initialize () {
+    this.icon = 'question-circle'
+    this.listenToAndRun(this, 'change:hasQuestions', function () {
+      if (this.hasQuestions) {
+        this.type = 'success'
+        this.heading = 'We have ' + pluralize('question', this.numQuestionsUnanswered, true) + ' for you'
+        this.details = 'Start <a href="/question">answering</a> questions'
+      } else {
+        this.type = 'default'
+        this.heading = 'We don\'t have any questions right now'
+        this.details = 'We will shoot you an e-mail when the robot has new questions'
       }
-    ],
-    'numQuestionsTotal': '[data-hook=num-questions-total]',
-    'numQuestionsUnanswered': '[data-hook=num-questions-unanswered]'
+    })
   }
 })
 
@@ -100,25 +87,38 @@ module.exports = AmpersandView.extend({
     var that = this
     this.renderWithTemplate(this)
     if (this.params['flash']) {
-      this.flashView = this.renderSubview(new FlashView({ 'message': this.params['flash'] }), '[data-hook=flash]')
+      this.flashView = this.renderSubview(new FlashView({
+        'message': this.params['flash']
+      }), '[data-hook=flash]')
     }
-    if (!(app.me.email_confirmed || this.params['noConfirm'])) {
-      this.confirmView = this.renderSubview(new ConfirmView(), '[data-hook=confirm]')
-    }
-    if (!(this.params['noQuestions'])) {
-      this.questionsView = this.renderSubview(new QuestionsView(), '[data-hook=questions]')
+    if (!this.params['noQuestions']) {
+      this.questions = this.renderSubview(new QuestionsWidget(), '[data-hook=questions]')
       $.ajax(config.api.url + '/question/stats', {
         method: 'GET',
         headers: app.getAuthHeader()
       }).fail(function (xhr, status, err) {
       }).done(function (data) {
         if (data.status === 'success') {
-          that.questionsView.numQuestionsTotal = data.questions
-          that.questionsView.numQuestionsAnswered = data.answers
+          that.questions.numQuestionsTotal = data.questions
+          that.questions.numQuestionsAnswered = data.answers
         } else {
         }
       })
     }
+    if (!(app.me.email_confirmed || this.params['noConfirm'])) {
+      this.confirm = this.renderSubview(new Widget.View({
+        heading: 'Please confirm your e-mail address',
+        icon: 'envelope',
+        type: 'warning',
+        details: 'If you did not receive a confirmation e-mail, please check your spam folder or request <a href="#resend">resend</a>'
+      }), '[data-hook=confirm]')
+    }
+    this.feedback = this.renderSubview(new Widget.View({
+      heading: 'Feedback',
+      icon: 'comment',
+      details: 'Click <a href="/feedback">here</a> to tell us what you think'
+    }), '[data-hook=feedback]')
+    return this
   },
 
   // Actions
