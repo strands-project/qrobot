@@ -9,7 +9,6 @@ module.exports = AmpersandRouter.extend({
     signup: require('./pages/signup'),
     feedback: require('./pages/feedback'),
     confirm: require('./pages/confirm'),
-    objects: require('./pages/objects'),
     questions: require('./pages/questions')
   },
 
