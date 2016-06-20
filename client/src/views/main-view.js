@@ -1,3 +1,4 @@
+var $ = require('jquery')
 var app = require('ampersand-app')
 var AmpersandView = require('ampersand-view')
 var AmpersandViewSwitcher = require('ampersand-view-switcher')
@@ -39,6 +40,7 @@ module.exports = AmpersandView.extend({
         fn.apply(page)
       }
     }
+    $('[autofocus]').focus()
     this.currentPage = page
   },
 
