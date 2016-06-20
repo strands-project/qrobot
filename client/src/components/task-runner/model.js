@@ -23,7 +23,7 @@ module.exports = AmpersandState.extend({
       task.started = (new Date()).getTime()
       task.state = 'active'
       fn(function (err, args) {
-        callback = _.bind(callback, arguments)
+        callback = _.partial(callback, err, args)
         var duration = ((new Date()).getTime() - task.started)
         var timeout = typeof minDuration === 'number' ? minDuration - duration : 0
         setTimeout(function () {
