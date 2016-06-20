@@ -1,6 +1,7 @@
 var _ = require('lodash')
 var app = require('ampersand-app')
 var AmpersandView = require('ampersand-view')
+var pluralize = require('pluralize')
 
 var config = require('config')
 var Answer = require('app/models/answer')
@@ -194,7 +195,7 @@ module.exports = AmpersandView.extend({
         } else {
           // No more questions
           console.log('No more questions!')
-          var flash = 'Well done, you have answered ' + that.questionsAnswered + ' question' + (that.questionsAnswered > 1 ? 's' : '') + '! That\'s all we have for now. We will shoot you an e-mail when we have more questions.'
+          var flash = 'Well done, you have answered ' + pluralize('question', that.questionsAnswered, true) + '! That\'s all we have for now. We will shoot you an e-mail when we have more questions.'
           callback(null)
           app.navigate('/', { 'flash': flash, 'noQuestions': true })
         }

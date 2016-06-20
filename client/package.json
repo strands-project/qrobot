@@ -69,6 +69,7 @@
     "lodash": "^4.6.1",
     "pace": "git+https://github.com/HubSpot/pace.git",
     "password-checker": "^0.2.4",
+    "pluralize": "^2.0.0",
     "raf": "^3.2.0",
     "right-now": "^1.0.0",
     "three": "^0.75.0",
