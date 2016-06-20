@@ -4,24 +4,9 @@ var AmpersandView = require('ampersand-view')
 var pluralize = require('pluralize')
 
 var config = require('config')
+var Flash = require('app/components/flash')
 var TaskRunner = require('app/components/task-runner')
 var Widget = require('app/components/widget')
-
-var FlashView = AmpersandView.extend({
-  template: require('app/templates/index-flash.jade'),
-  autoRender: true,
-
-  props: {
-    message: 'string'
-  },
-
-  bindings: {
-    message: {
-      type: 'text',
-      hook: 'message'
-    }
-  }
-})
 
 var QuestionsWidget = Widget.View.extend({
   props: {
@@ -87,7 +72,7 @@ module.exports = AmpersandView.extend({
     var that = this
     this.renderWithTemplate(this)
     if (this.params['flash']) {
-      this.flashView = this.renderSubview(new FlashView({
+      this.flashView = this.renderSubview(new Flash.View({
         'message': this.params['flash']
       }), '[data-hook=flash]')
     }
