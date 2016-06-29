@@ -68,6 +68,7 @@ module.exports = AmpersandView.extend({
 
   initialize: function initialize (spec) {
     this.interval = spec.interval || 2000
+    this.withIndicators = !(spec.indicators === false)
     this.listenTo(this.images, 'reset', function () {
       ImageView.instances = 0
       IndicatorView.instances = 0
@@ -78,7 +79,9 @@ module.exports = AmpersandView.extend({
   render: function render () {
     this.renderWithTemplate(this)
     this.itemsView = this.renderCollection(this.images, ImageView, this.query('.carousel-inner'))
-    this.indicatorsView = this.renderCollection(this.images, IndicatorView, this.query('.carousel-indicators'))
+    if (this.withIndicators) {
+      this.indicatorsView = this.renderCollection(this.images, IndicatorView, this.query('.carousel-indicators'))
+    }
     $('.carousel').carousel({
       interval: this.interval
     })
