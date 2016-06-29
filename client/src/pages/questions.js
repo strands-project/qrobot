@@ -100,8 +100,8 @@ module.exports = AmpersandView.extend({
         var flash = 'Actually, there are no questions at the moment. We will shoot you an e-mail when the robot has some.'
         app.navigate('/', { 'flash': flash, 'noQuestions': true })
       } else {
-        that.displayQuestion()
         app.view.modal.hide()
+        that.displayQuestion()
         that.carousel.cycle = true
       }
     })
@@ -166,8 +166,8 @@ module.exports = AmpersandView.extend({
         var flash = 'Well done, you have answered ' + pluralize('question', that.questionsAnswered, true) + '! That\'s all we have for now. We will shoot you an e-mail when we have more questions.'
         app.navigate('/', { 'flash': flash, 'noQuestions': true })
       } else {
-        that.displayQuestion()
         app.view.modal.hide()
+        that.displayQuestion()
         that.carousel.cycle = true
       }
     })
@@ -191,6 +191,7 @@ module.exports = AmpersandView.extend({
       return new Label.Model({ name: label })
     }))
     this.labelEditor.labels.reset()
+    this.labelEditor.focus()
     this.timeStart = (new Date()).getTime()
   },
 
