@@ -33,14 +33,16 @@ module.exports = AmpersandView.extend({
     if (typeof page.pageTitle === 'string') {
       document.title = page.pageTitle
     }
-    this.pageSwitcher.set(page)
-    if (action) {
-      var fn = page[action]
-      if (typeof fn === 'function') {
-        fn.apply(page)
+    page.once('change:rendered', function () {
+      $('[autofocus]').focus()
+      if (action) {
+        var fn = page[action]
+        if (typeof fn === 'function') {
+          fn.apply(page)
+        }
       }
-    }
-    $('[autofocus]').focus()
+    })
+    this.pageSwitcher.set(page)
     this.currentPage = page
   },
 
