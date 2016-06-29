@@ -173,3 +173,9 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 }
+
+// Carousel
+// Centralize images inside carousel
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
