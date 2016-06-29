@@ -20,20 +20,13 @@ var QuestionsWidget = Widget.View.extend({
       fn: function () {
         return this.numQuestionsTotal - this.numQuestionsAnswered
       }
-    },
-
-    hasQuestions: {
-      deps: ['numQuestionsUnanswered'],
-      fn: function () {
-        return this.numQuestionsUnanswered > 0
-      }
     }
   },
 
   initialize: function initialize () {
     this.icon = 'question-circle'
-    this.listenToAndRun(this, 'change:hasQuestions', function () {
-      if (this.hasQuestions) {
+    this.listenToAndRun(this, 'change:numQuestionsUnanswered', function () {
+      if (this.numQuestionsUnanswered) {
         this.type = 'success'
         this.heading = 'We have ' + pluralize('question', this.numQuestionsUnanswered, true) + ' for you'
         this.details = 'Start <a href="/question">answering</a> questions'
