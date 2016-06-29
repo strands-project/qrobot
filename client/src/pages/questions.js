@@ -95,7 +95,7 @@ module.exports = AmpersandView.extend({
     var taskRunner = new TaskRunner.Model()
     taskRunner.addTask('Fetching next question', _.bind(this.taskFetchQuestion, this), 2000)
     app.view.modal.show(new TaskRunner.View({ model: taskRunner }))
-    taskRunner.run(function (error, result) {
+    taskRunner.run(function () {
       if (!that.question) {
         var flash = 'Actually, there are no questions at the moment. We will shoot you an e-mail when the robot has some.'
         app.navigate('/', { 'flash': flash, 'noQuestions': true })
@@ -161,7 +161,7 @@ module.exports = AmpersandView.extend({
     this.carousel.cycle = false
     this.viewer.spin = false
     app.view.modal.show(new TaskRunner.View({ model: taskRunner }))
-    taskRunner.run(function (error, result) {
+    taskRunner.run(function () {
       if (!that.question) {
         var flash = 'Well done, you have answered ' + pluralize('question', that.questionsAnswered, true) + '! That\'s all we have for now. We will shoot you an e-mail when we have more questions.'
         app.navigate('/', { 'flash': flash, 'noQuestions': true })
