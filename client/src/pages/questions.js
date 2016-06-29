@@ -66,7 +66,12 @@ module.exports = AmpersandView.extend({
     },
     carousel: {
       hook: 'images',
-      constructor: Carousel.View
+      prepareView: function (el) {
+        return new Carousel.View({
+          el: el,
+          indicators: false
+        })
+      }
     },
     labelEditor: {
       hook: 'label-editor',
