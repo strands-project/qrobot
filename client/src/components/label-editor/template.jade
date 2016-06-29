@@ -1,7 +1,7 @@
 div
   div.input-group
-    input.form-control(type="text", data-hook="label-input")
+    input.form-control(type="text", autofocus, tabindex="1", data-hook="label-input")
     span.input-group-btn
-      button.btn.btn-primary(type="button", data-hook="label-add") Add
+      button.btn.btn-primary(type="button", tabindex="4", data-hook="label-add") Add
   div.list-group
   div.list-group(data-hook="labels")
