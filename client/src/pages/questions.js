@@ -95,10 +95,15 @@ module.exports = AmpersandView.extend({
     var taskRunner = new TaskRunner.Model()
     taskRunner.addTask('Fetching next question', _.bind(this.taskFetchQuestion, this), 2000)
     app.view.modal.show(new TaskRunner.View({ model: taskRunner }))
-    taskRunner.run(function () {
-      that.displayQuestion()
-      that.carousel.cycle = true
-      app.view.modal.hide()
+    taskRunner.run(function (error, result) {
+      if (!that.question) {
+        var flash = 'Actually, there are no questions at the moment. We will shoot you an e-mail when the robot has some.'
+        app.navigate('/', { 'flash': flash, 'noQuestions': true })
+      } else {
+        that.displayQuestion()
+        app.view.modal.hide()
+        that.carousel.cycle = true
+      }
     })
 
     return this
@@ -156,19 +161,24 @@ module.exports = AmpersandView.extend({
     this.carousel.cycle = false
     this.viewer.spin = false
     app.view.modal.show(new TaskRunner.View({ model: taskRunner }))
-    taskRunner.run(function () {
-      that.displayQuestion()
-      app.view.modal.hide()
-      that.carousel.cycle = true
-      that.viewer.reset()
-      that.viewer.spin = true
+    taskRunner.run(function (error, result) {
+      if (!that.question) {
+        var flash = 'Well done, you have answered ' + pluralize('question', that.questionsAnswered, true) + '! That\'s all we have for now. We will shoot you an e-mail when we have more questions.'
+        app.navigate('/', { 'flash': flash, 'noQuestions': true })
+      } else {
+        that.displayQuestion()
+        app.view.modal.hide()
+        that.carousel.cycle = true
+      }
     })
   },
 
   displayQuestion: function displayQuestion () {
     var that = this
     // Visualize model
+    this.viewer.reset()
     this.viewer.uri = this.question.point_cloud_uri
+    this.viewer.spin = true
     // Visualize images
     this.carousel.images.reset()
     _.forEach(this.question.image_ids, function (image_id) {
@@ -191,14 +201,12 @@ module.exports = AmpersandView.extend({
       success: function (question, response) {
         if (question.getId()) {
           console.log('Received a question #', question.getId())
-          callback(null)
         } else {
           // No more questions
-          console.log('No more questions!')
-          var flash = 'Well done, you have answered ' + pluralize('question', that.questionsAnswered, true) + '! That\'s all we have for now. We will shoot you an e-mail when we have more questions.'
-          callback(null)
-          app.navigate('/', { 'flash': flash, 'noQuestions': true })
+          console.log('No questions')
+          delete that.question
         }
+        callback(null)
       },
       error: function () {
         callback(new Error('Could not connect to the server'))
