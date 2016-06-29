@@ -1,3 +1,4 @@
+var $ = require('jquery')
 var AmpersandView = require('ampersand-view')
 var dom = require('ampersand-dom')
 
@@ -57,6 +58,10 @@ module.exports = AmpersandView.extend({
       labelInput: '[data-hook=label-input]'
     })
     return this
+  },
+
+  focus: function focus () {
+    $(this.labelInput).focus()
   },
 
   // Handlers
