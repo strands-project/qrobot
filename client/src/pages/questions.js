@@ -115,9 +115,7 @@ module.exports = AmpersandView.extend({
   },
 
   handleSubmitClick: function handleSubmitClick () {
-    var labels = this.labelEditor.labels.map(function (label) {
-      return label.name
-    })
+    var labels = this.labelEditor.getLabels()
     if (labels.length) {
       var answer = new Answer.Model({
         question_id: this.question.getId(),

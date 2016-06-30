@@ -60,11 +60,21 @@ module.exports = AmpersandView.extend({
     return this
   },
 
+  /* Give focus to the label input field. */
   focus: function focus () {
     $(this.labelInput).focus()
   },
 
+  /* Get the list of labels entered by the user. */
+  getLabels: function getLabels () {
+    this.handleAddClick()
+    return this.labels.map(function (label) {
+      return label.name
+    })
+  },
+
   // Handlers
+
   handleAddClick: function handleAddClick () {
     // TODO escape
     var label = this.labelInput.value
