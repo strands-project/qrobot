@@ -17,6 +17,4 @@ def submit():
     feedback.user = user
     feedback.message = data['message']
     feedback.save()
-    import time
-    time.sleep(2)
-    return jsonify(status='success', message='You feedback has been saved')
+    return jsonify(status='success', message='Thanks for sharing your opinion with us!')
