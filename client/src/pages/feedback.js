@@ -1,6 +1,7 @@
 var $ = require('jquery')
 var app = require('ampersand-app')
 var AmpersandView = require('ampersand-view')
+var dom = require('ampersand-dom')
 
 var config = require('config')
 var Alert = require('app/components/alert')
@@ -14,7 +15,6 @@ module.exports = AmpersandView.extend({
 
   render: function render () {
     this.renderWithTemplate(this)
-    this.alert = new Alert.View({ el: this.queryByHook('alert') })
     this.submitButton = new Ladda.View({
       el: this.queryByHook('submit'),
       caption: 'Submit',
@@ -23,12 +23,25 @@ module.exports = AmpersandView.extend({
       style: 'slide-right',
       tabindex: 2
     })
+    this.cacheElements({
+      textarea: 'textarea',
+      group: 'div.form-group'
+    })
     this.listenTo(this.submitButton, 'submit', this.handleFormSubmitted)
+    this.alert = new Alert.View({ el: this.queryByHook('alert') })
+    this.registerSubview(this.alert)
+    return this
   },
 
   handleFormSubmitted: function handleFormSubmitted () {
     var that = this
-    var message = this.query('textarea').value
+    var message = this.textarea.value
+    if (message === '') {
+      dom.addClass(this.group, 'has-error')
+      return
+    } else {
+      dom.removeClass(this.group, 'has-error')
+    }
     var xhr = $.ajax(config.api.url + '/feedback', {
       method: 'POST',
       data: JSON.stringify({ 'message': message }),
