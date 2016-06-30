@@ -10,3 +10,4 @@ class Feedback(db.Document):
     user = db.ReferenceField(User, db_field='user_id')
     created = db.DateTimeField(default=datetime.datetime.now)
     message = db.StringField()
+    browser = db.StringField()

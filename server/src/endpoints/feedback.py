@@ -16,5 +16,6 @@ def submit():
     feedback = Feedback()
     feedback.user = user
     feedback.message = data['message']
+    feedback.browser = data['browser']
     feedback.save()
     return jsonify(status='success', message='Thanks for sharing your opinion with us!')

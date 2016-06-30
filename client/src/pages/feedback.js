@@ -44,7 +44,10 @@ module.exports = AmpersandView.extend({
     }
     var xhr = $.ajax(config.api.url + '/feedback', {
       method: 'POST',
-      data: JSON.stringify({ 'message': message }),
+      data: JSON.stringify({
+        'message': message,
+        'browser': navigator.userAgent
+      }),
       headers: app.getAuthHeader(),
       contentType: 'application/json'
     }).fail(function (xhr, status, err) {
