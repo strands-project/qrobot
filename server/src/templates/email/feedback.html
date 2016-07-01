@@ -1,0 +1,9 @@
+{{ feedback.user.name }} left the following feedback message:
+
+<p>
+{{ feedback.message }}
+</p>
+
+Click to <a href="mailto:{{ feedback.user.email }}?subject=QRobot%20-%20Thanks%20for%20the%20feedback">reply</a>.
+
+User agent: {{ feedback.browser }}
