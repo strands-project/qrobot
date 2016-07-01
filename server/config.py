@@ -13,6 +13,7 @@ class Config(object):
     MAIL_SERVER = 'localhost'
     MAIL_PORT = 25
     MAIL_DEFAULT_SENDER = 'support@qrobot.com'
+    MAIL_ADMIN = 'admin@qrobot.com'
     DEBUG = False
     TESTING = False
 

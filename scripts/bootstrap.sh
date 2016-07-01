@@ -8,9 +8,10 @@ export LOGS=/home/qrobot/log
 
 function production() {
   echo "Bootstrapping production environment"
-  echo "Please enter host and port for the Nginx server"
-  read -p "Host: " nginx_host
-  read -p "Port: " nginx_port
+  echo "Please enter configuration options:"
+  read -p " * Host for the Nginx server: " nginx_host
+  read -p " * Port for the Nginx server: " nginx_port
+  read -p " * Admin e-mail address: " mail_admin
   # Install system libraries
   apt-get update
   cat $PROJECT_CONFIG/production.apt | xargs apt-get install -y
@@ -32,6 +33,7 @@ function production() {
   echo "# MONGODB_PORT = 27017" >> $flask
   echo "# MAIL_SERVER = 'localhost'" >> $flask
   echo "# MAIL_PORT = 25" >> $flask
+  echo "MAIL_ADMIN = '$mail_admin'" >> $flask
   # Transfer ownership of created files to the qrobot user
   chown qrobot:qrobot $PROJECT_ROOT -R
   chown qrobot:qrobot $LOGS
